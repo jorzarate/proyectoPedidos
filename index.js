@@ -27,8 +27,10 @@ db.sequelize.sync(              ).then((result) => {
 // RUTAS
 const UsuarioRoutes = require("./routes/usuario.routes");
 const RolRoutes = require("./routes/rol.routes");
+const estadoPedidoRoutes = require("./routes/estadoPedido.routes");
 app.use('/usuario', UsuarioRoutes);
 app.use('/rol', RolRoutes);
+app.use('/estadoPedido', estadoPedidoRoutes);
 
 
 const PORT = process.env.PORT || 3000;
