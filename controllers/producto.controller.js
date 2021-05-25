@@ -1,11 +1,11 @@
 const db = require("../models");
 
 exports.principal = (req, res) => {
-    db.EstadoPedido.findAll({
-        attributes: ["id", "nombre", "descripcion"],
+    db.Producto.findAll({
+        attributes: ["id", "nombre", "precio"],
         order: [
           ["nombre", "DESC"],
-          ["descripcion", "ASC"],
+          ["precio", "ASC"],
         ],
       })
         .then((registros) => {
@@ -20,35 +20,16 @@ exports.principal = (req, res) => {
     }
 
 exports.buscar = (req, res) => {
-  const key = req.params.key;
-  const value = req.params.value;
-
-  db.EstadoPedido.findAll({
-      attributes: ["id", "nombre", "descripcion"],
-      where: { [key]: value },
-      order: [
-      ["nombre", "DESC"],
-      ["descripcion", "ASC"],
-      ],
-  })
-  .then((registros) => {
-  res.status(200).send(registros);
-  })
-  .catch((err) => {
-      res.status(500).send({
-          msg: "Error en accceso a la base de datos",
-          error: err.errors[0].message,
-      });
-  });
+    res.status(200).send({ msg: 'OK desde BUSCAR ******* ' });
 }
 
 exports.nuevo = (req, res) => {
     const nuevoRegistro = {
         nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
+        precio: req.body.precio,
       };
     
-      db.EstadoPedido.create(nuevoRegistro)
+      db.Producto.create(nuevoRegistro)
         .then((reg) => {
           res.status(200).send({
             msg: "OK creado correctamente ",
@@ -66,12 +47,12 @@ exports.nuevo = (req, res) => {
 exports.editar = (req, res) => {
   let registroActualizar = {
     nombre: req.body.nombre,
-    descripcion: req.body.descripcion,
+    precio: req.body.precio,
   };
 
   const id = req.body.id;
 
-  db.EstadoPedido.update(registroActualizar, {
+  db.Producto.update(registroActualizar, {
     where: { id: id },
   })
     .then((cant) => {

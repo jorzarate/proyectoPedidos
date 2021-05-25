@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 const db = require("./models/index");
 
              //    {alter:true} 
-db.sequelize.sync(              ).then((result) => {
+db.sequelize.sync(             ).then((result) => {
     console.log("DB sincronizada OK!");
   })
   .catch((err) => {
@@ -28,9 +28,16 @@ db.sequelize.sync(              ).then((result) => {
 const UsuarioRoutes = require("./routes/usuario.routes");
 const RolRoutes = require("./routes/rol.routes");
 const estadoPedidoRoutes = require("./routes/estadoPedido.routes");
+const productoRoutes = require("./routes/producto.routes");
+const detallePedidoRoutes = require("./routes/detallePedido.routes");
+const pedidoRoutes = require("./routes/pedido.routes");
+
 app.use('/usuario', UsuarioRoutes);
 app.use('/rol', RolRoutes);
 app.use('/estadoPedido', estadoPedidoRoutes);
+app.use('/producto', productoRoutes);
+app.use('/detallePedido', detallePedidoRoutes);
+app.use('/pedido', pedidoRoutes);
 
 
 const PORT = process.env.PORT || 3000;

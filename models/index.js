@@ -28,8 +28,8 @@ db.EstadoPedido = require('./estadoPedido')(sequelize,Sequelize);
 db.Producto = require('./producto')(sequelize,Sequelize);
 
 // RELACIONES
-db.Rol.hasMany(db.Usuario);
 db.Usuario.belongsTo(db.Rol);
+db.Rol.hasMany(db.Usuario);
 
 db.Pedido.belongsTo(db.EstadoPedido); // Un Pedido tiene Un EstadoPedido
 db.EstadoPedido.hasMany(db.Pedido); // Un estadoPedido tiene varios Pedidos

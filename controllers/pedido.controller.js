@@ -1,11 +1,11 @@
 const db = require("../models");
 
 exports.principal = (req, res) => {
-    db.EstadoPedido.findAll({
-        attributes: ["id", "nombre", "descripcion"],
+    db.Pedido.findAll({
+        attributes: ["id", "numero", "fechaCreacion"],
         order: [
-          ["nombre", "DESC"],
-          ["descripcion", "ASC"],
+          ["numero", "DESC"],
+          ["fechaCreacion", "ASC"],
         ],
       })
         .then((registros) => {
@@ -23,12 +23,12 @@ exports.buscar = (req, res) => {
   const key = req.params.key;
   const value = req.params.value;
 
-  db.EstadoPedido.findAll({
-      attributes: ["id", "nombre", "descripcion"],
+  db.Pedido.findAll({
+      attributes: ["id", "numero", "fechaCreacion"],
       where: { [key]: value },
       order: [
-      ["nombre", "DESC"],
-      ["descripcion", "ASC"],
+      ["numero", "DESC"],
+      ["fechaCreacion", "ASC"],
       ],
   })
   .then((registros) => {
@@ -44,11 +44,11 @@ exports.buscar = (req, res) => {
 
 exports.nuevo = (req, res) => {
     const nuevoRegistro = {
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
+        numero: req.body.numero,
+        fechaCreacion: req.body.fechaCreacion,
       };
     
-      db.EstadoPedido.create(nuevoRegistro)
+      db.Pedido.create(nuevoRegistro)
         .then((reg) => {
           res.status(200).send({
             msg: "OK creado correctamente ",
@@ -65,13 +65,13 @@ exports.nuevo = (req, res) => {
 
 exports.editar = (req, res) => {
   let registroActualizar = {
-    nombre: req.body.nombre,
-    descripcion: req.body.descripcion,
+    numero: req.body.numero,
+    fechaCreacion: req.body.fechaCreacion,
   };
 
   const id = req.body.id;
 
-  db.EstadoPedido.update(registroActualizar, {
+  db.Pedido.update(registroActualizar, {
     where: { id: id },
   })
     .then((cant) => {

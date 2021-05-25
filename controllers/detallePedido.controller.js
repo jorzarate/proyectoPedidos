@@ -1,45 +1,45 @@
 const db = require("../models");
 
 exports.principal = (req, res) => {
-    db.EstadoPedido.findAll({
+    db.DetallePedido.findAll({
         attributes: ["id", "nombre", "descripcion"],
         order: [
           ["nombre", "DESC"],
           ["descripcion", "ASC"],
         ],
-      })
-        .then((registros) => {
-          res.status(200).send(registros);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            msg: "Error en accceso a la base de datos",
-            error: err.errors[0].message,
-          });
+    })
+    .then((registros) => {
+        res.status(200).send(registros);
+    })
+    .catch((err) => {
+        res.status(500).send({
+        msg: "Error en accceso a la base de datos",
+        error: err.errors[0].message,
         });
-    }
+    });
+}
 
 exports.buscar = (req, res) => {
-  const key = req.params.key;
-  const value = req.params.value;
+    const key = req.params.key;
+    const value = req.params.value;
 
-  db.EstadoPedido.findAll({
-      attributes: ["id", "nombre", "descripcion"],
-      where: { [key]: value },
-      order: [
-      ["nombre", "DESC"],
-      ["descripcion", "ASC"],
-      ],
-  })
-  .then((registros) => {
-  res.status(200).send(registros);
-  })
-  .catch((err) => {
-      res.status(500).send({
-          msg: "Error en accceso a la base de datos",
-          error: err.errors[0].message,
-      });
-  });
+    db.DetallePedido.findAll({
+        attributes: ["id", "nombre", "descripcion"],
+        where: { [key]: value },
+        order: [
+        ["nombre", "DESC"],
+        ["descripcion", "ASC"],
+        ],
+    })
+    .then((registros) => {
+    res.status(200).send(registros);
+    })
+    .catch((err) => {
+        res.status(500).send({
+            msg: "Error en accceso a la base de datos",
+            error: err.errors[0].message,
+        });
+    });
 }
 
 exports.nuevo = (req, res) => {
@@ -48,7 +48,7 @@ exports.nuevo = (req, res) => {
         descripcion: req.body.descripcion,
       };
     
-      db.EstadoPedido.create(nuevoRegistro)
+      db.DetallePedido.create(nuevoRegistro)
         .then((reg) => {
           res.status(200).send({
             msg: "OK creado correctamente ",
@@ -71,7 +71,7 @@ exports.editar = (req, res) => {
 
   const id = req.body.id;
 
-  db.EstadoPedido.update(registroActualizar, {
+  db.DetallePedido.update(registroActualizar, {
     where: { id: id },
   })
     .then((cant) => {
